@@ -3,15 +3,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from "react";
-import { Search, Sparkles } from "lucide-react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { Search, Sparkles, Maximize2, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/src/lib/utils";
 
 interface InputSectionProps {
-  onGenerate: (topic: string, audience: string) => void;
+  onGenerate: (topic: string, audience: string) => Promise<void>;
   isLoading: boolean;
-  isDark?: boolean;
+  isDark: boolean;
+  topic: string;
+  setTopic: Dispatch<SetStateAction<string>>;
+  audience: string;
+  setAudience: Dispatch<SetStateAction<string>>;
 }
 
 const AUDIENCES = [
@@ -24,9 +28,35 @@ const AUDIENCES = [
   { label: "Donkey", help: "Bray" }
 ];
 
-export default function InputSection({ onGenerate, isLoading, isDark }: InputSectionProps) {
-  const [topic, setTopic] = useState("");
-  const [audience, setAudience] = useState("Student");
+export default function InputSection({ 
+  onGenerate, 
+  isLoading, 
+  isDark, 
+  topic, 
+  setTopic, 
+  audience, 
+  setAudience 
+}: InputSectionProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tempTopic, setTempTopic] = useState(topic);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsModalOpen(false);
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, []);
+
+  const openModal = () => {
+    setTempTopic(topic);
+    setIsModalOpen(true);
+  };
+
+  const handleConfirm = () => {
+    setTopic(tempTopic);
+    setIsModalOpen(false);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,6 +102,17 @@ export default function InputSection({ onGenerate, isLoading, isDark }: InputSec
                   isDark ? "text-white placeholder:text-teal-600" : "text-[#013E37] placeholder:text-teal-600"
                 )}
               />
+              <button 
+                type="button"
+                onClick={openModal}
+                className={cn(
+                  "ml-2 p-1 hover:bg-teal-500/10 transition-colors rounded",
+                  isDark ? "text-teal-300" : "text-teal-600"
+                )}
+                title="Expand Input"
+              >
+                <Maximize2 className="h-4 w-4" />
+              </button>
             </div>
           </div>
 
@@ -122,7 +163,81 @@ export default function InputSection({ onGenerate, isLoading, isDark }: InputSec
           </button>
         </form>
       </motion.div>
+
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 1.1, opacity: 0, filter: "blur(10px)" }}
+              className={cn(
+                "border-4 p-8 max-w-2xl w-full shadow-bento relative",
+                isDark 
+                  ? "bg-[#013E37] border-[#FFEFB3] shadow-bento-white" 
+                  : "bg-[#FFEFB3] border-[#013E37] shadow-bento"
+              )}
+            >
+              <button 
+                onClick={() => setIsModalOpen(false)}
+                className={cn(
+                  "absolute top-4 right-4 transition-transform hover:scale-110",
+                  isDark ? "text-[#FFEFB3]" : "text-[#013E37]"
+                )}
+              >
+                <X className="w-6 h-6" />
+              </button>
+              
+              <h3 className={cn(
+                "text-xl font-black uppercase tracking-tighter mb-6",
+                isDark ? "text-[#FFEFB3]" : "text-[#013E37]"
+              )}>
+                Complex Topic Entry
+              </h3>
+
+              <textarea
+                value={tempTopic}
+                onChange={(e) => setTempTopic(e.target.value)}
+                placeholder="Describe your complex topic in detail..."
+                rows={8}
+                className={cn(
+                  "w-full p-4 border-2 font-mono font-bold text-sm outline-none resize-none mb-6",
+                  isDark 
+                    ? "bg-teal-800/50 border-teal-500 text-white placeholder:text-teal-600" 
+                    : "bg-[#F5F2E9] border-[#013E37] text-[#013E37] placeholder:text-teal-600"
+                )}
+              />
+
+              <div className="flex justify-end gap-4">
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className={cn(
+                    "px-6 py-2 font-black text-xs uppercase tracking-widest border-2 transition-all",
+                    isDark 
+                      ? "border-[#FFEFB3] text-[#FFEFB3] hover:bg-white/10" 
+                      : "border-[#013E37] text-[#013E37] hover:bg-black/5"
+                  )}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleConfirm}
+                  className={cn(
+                    "px-6 py-2 font-black text-xs uppercase tracking-widest transition-all border-2",
+                    isDark 
+                      ? "bg-[#FFEFB3] text-[#013E37] border-[#FFEFB3] hover:bg-white active:translate-y-1" 
+                      : "bg-[#013E37] text-[#FFEFB3] border-[#013E37] hover:bg-teal-800 active:translate-y-1"
+                  )}
+                >
+                  Confirm
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
-
