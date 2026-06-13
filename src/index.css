@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+  
+  body:not(.dark-theme) {
+    @apply bg-[#FFEFB3] text-[#013E37];
+  }
+  
+  body.dark-theme {
+    @apply bg-[#013E37] text-[#FFEFB3];
+  }
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --shadow-bento: 4px 4px 0px #013E37;
+  --shadow-bento-sm: 2px 2px 0px #013E37;
+  --shadow-bento-white: 4px 4px 0px #FFEFB3;
+
+  /* Force HEX for all colors to support legacy html2canvas parsing */
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-900: #013e37;
+  --color-teal-950: #042f2e;
+
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+  --color-red-950: #450a0a;
+
+  --color-green-500: #22c55e;
+
+  --color-primary-cream: #FFEFB3;
+  --color-primary-teal: #013E37;
+  --color-accent-teal: #0D9488;
+  --color-soft-cream: #FFF5D1;
+  
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-900: #013E37; 
+  
+  --color-white: #ffffff;
+  --color-black: #000000;
+}
+
+/* Custom scollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #013E37;
+}
+
+@keyframes sweep-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes shiver-morph {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-shiver-morph-light {
+  background: linear-gradient(to right, #FDF0C6 0%, #FFFAEA 50%, #FDF0C6 100%);
+  background-size: 200% 100%;
+  animation: shiver-morph 2s ease-in-out infinite;
+}
+
+.animate-shiver-morph-dark {
+  background: linear-gradient(to right, #012b26 0%, #02534a 50%, #012b26 100%);
+  background-size: 200% 100%;
+  animation: shiver-morph 2s ease-in-out infinite;
+}
+
+.animate-sweep-shimmer {
+  background: linear-gradient(110deg, #ffe97a 8%, #fff8d6 18%, #ffe97a 33%);
+  background-size: 200% 100%;
+  animation: sweep-shimmer 1.5s linear infinite;
+}
+
+.animate-sweep-shimmer-light {
+  background: linear-gradient(110deg, #ffd35c 8%, #fff4be 18%, #ffd35c 33%);
+  background-size: 200% 100%;
+  animation: sweep-shimmer 1.5s linear infinite;
+}
+
+.animate-sweep-shimmer-dark {
+  background: linear-gradient(110deg, #012b26 8%, #02534a 18%, #012b26 33%);
+  background-size: 200% 100%;
+  animation: sweep-shimmer 1.5s linear infinite;
+}
+
+@keyframes shimmer-yellow {
+  0% {
+    background-color: #fff8d6;
+  }
+  50% {
+    background-color: #ffe97a;
+  }
+  100% {
+    background-color: #fff8d6;
+  }
+}
+
+.animate-shimmer-yellow {
+  animation: shimmer-yellow 1.8s ease-in-out infinite;
+}
+
