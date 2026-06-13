@@ -1,0 +1,8 @@
+{
+  "name": "Structured AI Knowledge Builder",
+  "description": "Transform topics into structured 7-section learning interfaces with modular AI-powered cards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_AGENT_API"
+  ]
+}
