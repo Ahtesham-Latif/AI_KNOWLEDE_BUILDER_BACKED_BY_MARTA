@@ -149,27 +149,42 @@ export default function KnowledgeCard({ title, icon, content, fallback, index, o
       )}>
         {Array.isArray(content) ? (
           <ul className="space-y-2">
-            {content.map((item, i) => (
-              <li key={i} className="flex items-start space-x-2 text-xs group/item">
-                <span className={cn(
-                  "mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0",
-                  isDark ? "bg-teal-400" : "bg-[#013E37]"
-                )} />
-                <span className="flex-grow">{item}</span>
-                {onDeepDive && (
-                  <button 
-                    onClick={() => onDeepDive(item)}
-                    className={cn(
-                      "opacity-0 group-hover/item:opacity-100 transition-opacity p-0.5",
-                      isDark ? "text-teal-200" : "text-teal-300 hover:text-[#013E37]"
-                    )}
-                    title={`Deep dive into "${item}"`}
-                  >
-                    <ExternalLink className="w-3 h-3" />
-                  </button>
-                )}
-              </li>
-            ))}
+            {content.map((item, i) => {
+              const isSources = title.toLowerCase().includes("sources");
+              return (
+                <li key={i} className="flex items-start space-x-2 text-xs group/item">
+                  <span className={cn(
+                    "mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0",
+                    isDark ? "bg-teal-400" : "bg-[#013E37]"
+                  )} />
+                  {isSources ? (
+                    <a
+                      href={item}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex-grow hover:underline break-all"
+                    >
+                      {item}
+                    </a>
+                  ) : (
+                    <span className="flex-grow">{item}</span>
+                  )}
+                  {onDeepDive && !isSources && (
+                    <button 
+                      onClick={() => onDeepDive(item)}
+                      className={cn(
+                        "opacity-0 group-hover/item:opacity-100 transition-opacity p-0.5",
+                        isDark ? "text-teal-200" : "text-teal-300 hover:text-[#013E37]"
+                      )}
+                      title={`Deep dive into "${item}"`}
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                    </button>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         ) : typeof content === 'string' && content.startsWith("VIDEO_ID:") ? (
           getYoutubeContent(content)
@@ -190,4 +205,3 @@ export default function KnowledgeCard({ title, icon, content, fallback, index, o
     </motion.div>
   );
 }
-

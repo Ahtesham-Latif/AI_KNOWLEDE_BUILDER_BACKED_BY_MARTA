@@ -108,7 +108,14 @@ async function startServer() {
       }
 
       const cleanJson = textContent.replace(/```json|```/g, '').trim();
-      const result = JSON.parse(cleanJson);
+
+      const sanitized = cleanJson
+        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // control chars
+        .replace(/\\(?!["\\/bfnrtu])/g, '\\\\') // fix bad backslashes
+        .replace(/([^\\])'|^'/g, '$1\\"') // fix unescaped single quotes
+        .trim();
+
+      const result = JSON.parse(sanitized);
 
       const validation = validateMartaResponse(result);
       if (!validation.valid) {
