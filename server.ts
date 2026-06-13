@@ -22,6 +22,9 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
+  // Trust proxy to ensure accurate client IP detection for rate limiting
+  app.set('trust proxy', 1);
+
   app.use(express.json());
   app.use(express.urlencoded({ extended: true, limit: "15mb" }));
 
@@ -74,7 +77,6 @@ async function startServer() {
       if (!foundryEndpoint) {
         console.error("FOUNDRY_ENDPOINT environment variable is missing!");
         return res.status(500).json({ error: "Missing Foundry Agent configuration on server setup" });
-        return res.status(500).json({ error: "Missing Knowledge Engine configuration on server setup" });
       }
 
       const credential = new AzureCliCredential();

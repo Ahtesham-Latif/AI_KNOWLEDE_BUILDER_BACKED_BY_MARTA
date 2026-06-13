@@ -1,31 +1,19 @@
 # Structured AI Knowledge Builder
-Synthesizing unstructured AI noise into architectural knowledge artifacts.
+Architecture for information, not just text.
 
-## 📹 Demo Video
-> **[▶ Watch Full Demo on YouTube](YOUR_LINK_HERE)**
+## Demo Video
+[Watch Demo](https://www.youtube.com/watch?v=XnnfZWsPxfo)
 
 ## The Problem
-Most AI tools output "walls of text"—unorganized Markdown that is difficult to scan, verify, or reuse. Users spend more time formatting and cross-referencing AI responses than actually learning from them. Current LLM outputs lack spatial hierarchy and often hallucinate references.
+Most AI tools output "walls of text"—unorganized Markdown blocks that are difficult to scan, verify, or reuse. Users spend more time parsing LLM responses into useful formats than actually consuming the knowledge. Standard chat interfaces lack spatial hierarchy and often hallucinate technical references.
 
 ## The Solution
-The Structured AI Knowledge Builder implements an 8-stage synthesis pipeline that orchestrates raw intent into a Neo-Brutalist Bento Grid. By replacing standard LLM chat interfaces with a structured extraction engine, the application ensures every piece of information has a designated functional home, from layman summaries to cited technical sources.
+The Structured AI Knowledge Builder implements an 8-stage synthesis pipeline that orchestrates raw intent into a Neo-Brutalist Bento Grid. By replacing standard chat with an extraction engine, the application ensures every piece of information has a designated functional home, ranging from layman summaries to cited technical sources.
 
 ## Architecture
 
-```text
-User Input (Topic + Persona) 
-       ↓
-React 19 Frontend (Vite)
-       ↓
-Node.js/Express Backend (Validation Layer)
-       ↓
-MARTA (Azure AI Foundry IQ + Bing Web Search)
-       ↓
-Validated JSON Payload
-       ↓
-Bento Grid UI (Lucide Icons + Framer Motion)
-       ↓
-Puppeteer (Server-side PDF Export)
+```
+User -> React Frontend -> Express Backend -> MARTA (Azure Foundry IQ + Bing Web Search) -> JSON -> Bento Grid -> PDF Export
 ```
 
 ## MARTA — The Foundry IQ Layer
