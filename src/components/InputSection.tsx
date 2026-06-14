@@ -132,6 +132,7 @@ export default function InputSection({
                   "block w-full border px-3 py-2 text-sm font-bold outline-none h-10 appearance-none cursor-pointer transition-colors",
                   isDark ? "bg-teal-800/50 border-teal-500 text-white" : "bg-[#FFF5D1] border-teal-200 text-[#013E37]"
                 )}
+                aria-label="Target Audience"
               >
                 {AUDIENCES.map(a => <option key={a.label} value={a.label} className={isDark ? "bg-[#013E37]" : "bg-white"}>{a.label}</option>)}
               </select>

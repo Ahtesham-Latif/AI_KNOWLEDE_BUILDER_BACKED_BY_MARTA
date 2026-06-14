@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "motion/react";
 import { cn } from "../lib/utils";
 import { 
   Baby, 
@@ -29,22 +30,25 @@ const STEPS = [
 export default function ProcessChain({ isDark }: ProcessChainProps) {
   return (
     <div className="max-w-4xl mx-auto px-4 mb-10 overflow-x-auto no-scrollbar">
-      <div className="flex items-center justify-between min-w-[600px] py-4">
+      <div className="flex items-center justify-between min-w-150 py-4">
         {STEPS.map((step, idx) => (
           <React.Fragment key={idx}>
             <div className="flex flex-col items-center gap-2 group">
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * idx }}
                 className={cn(
-                  "w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-75",
+                  "w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all",
                   isDark 
-                    ? "bg-[#013E37] border-[#FFEFB3] text-[#FFEFB3] shadow-[4px_4px_0px_0px_#FFEFB3] group-hover:shadow-none group-hover:translate-x-[2px] group-hover:translate-y-[2px]" 
-                    : "bg-[#FFEFB3] border-[#013E37] text-[#013E37] shadow-[4px_4px_0px_0px_#013E37] group-hover:shadow-none group-hover:translate-x-[2px] group-hover:translate-y-[2px]"
+                    ? "bg-[#013E37] border-primary-cream text-primary-cream shadow-bento-white" 
+                    : "bg-primary-cream border-[#013E37] text-[#013E37] shadow-sm"
                 )}
               >
                 {step.icon}
-              </div>
+              </motion.div>
               <span className={cn(
-                "text-[9px] font-black uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity",
+                "text-[8px] font-black uppercase tracking-widest opacity-50 group-hover:opacity-100 transition-opacity",
                 isDark ? "text-teal-200" : "text-teal-600"
               )}>
                 {step.label}
@@ -52,7 +56,7 @@ export default function ProcessChain({ isDark }: ProcessChainProps) {
             </div>
             {idx < STEPS.length - 1 && (
               <div className={cn(
-                "h-[2px] flex-grow mx-2 mb-6",
+                "h-0.5 grow mx-2 mb-6",
                 isDark ? "bg-teal-800" : "bg-teal-100"
               )} />
             )}

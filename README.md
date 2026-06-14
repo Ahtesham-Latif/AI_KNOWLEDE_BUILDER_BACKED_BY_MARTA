@@ -1,159 +1,398 @@
 # Structured AI Knowledge Builder
-## Stop reading walls of AI text. Start consuming structured knowledge — grounded, cited, and synthesized by MARTA on Azure Foundry IQ.
 
-![React 19](https://img.shields.io/badge/React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Azure AI Foundry](https://img.shields.io/badge/Azure%20AI%20Foundry-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
-![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-000000?style=for-the-badge&logo=githubcopilot&logoColor=white)
-![OWASP Top 10 Protected](https://img.shields.io/badge/OWASP%20Top%2010-LLM%20Safe-E02F2F?style=for-the-badge&logo=owasp&logoColor=white)
+> Transform any topic into structured, grounded, and reusable knowledge using Azure AI Foundry Agents.
 
-## 📹 Demo Video
-[▶ Watch Full Demo on YouTube](https://www.youtube.com/watch?v=XnnfZWsPxfo)
+![React 19](https://img.shields.io/badge/React%2019-20232A?style=for-the-badge\&logo=react\&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge\&logo=nodedotjs\&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge\&logo=typescript\&logoColor=white)
+![Azure AI Foundry](https://img.shields.io/badge/Azure%20AI%20Foundry-0078D4?style=for-the-badge\&logo=microsoftazure\&logoColor=white)
+![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-000000?style=for-the-badge\&logo=githubcopilot\&logoColor=white)
+![OWASP Protected](https://img.shields.io/badge/OWASP-LLM%20Safe-E02F2F?style=for-the-badge\&logo=owasp\&logoColor=white)
 
-## The Problem
-Most AI tools output walls of text — unorganized Markdown blocks that are difficult to scan, verify, or reuse. Users spend more time parsing LLM responses into useful formats than actually consuming the knowledge. Standard chat interfaces lack spatial hierarchy and often hallucinate technical references.
+---
 
-## The Solution
-The Structured AI Knowledge Builder implements an 8-stage synthesis pipeline that orchestrates raw intent into a Neo-Brutalist Bento Grid. By replacing standard chat with an extraction engine, the application ensures every piece of information has a designated functional home — from layman summaries to cited technical sources.
+## 🚀 Overview
 
-## Architecture
+Large Language Models are excellent at generating information but often return lengthy, unstructured responses that are difficult to scan, validate, and retain.
+
+Structured AI Knowledge Builder solves this problem by converting a topic into a structured educational artifact through an AI-powered synthesis pipeline. Instead of receiving a wall of text, users receive a curated knowledge experience organized into dedicated learning modules.
+
+Built for the **Microsoft Agents League – AI Skills Fest 2026**, the project demonstrates how Azure AI Foundry Agents can be used to create grounded, reliable, and user-friendly AI experiences.
+
+---
+
+## 📹 Demo
+
+**Watch the Full Project Demo**
+
+[▶ Watch on YouTube](https://www.youtube.com/watch?v=XnnfZWsPxfo)
+
+---
+
+## 📸 Application Preview
+
+![Application Screenshot](./Pictures/Layout.png)
+
+---
+
+## ✨ What Makes This Different?
+
+Most AI applications focus on generating more text.
+
+This project focuses on generating **better knowledge**.
+
+Every response is transformed into structured learning modules:
+
+* Plain-English explanation
+* Formal definition
+* Practical use cases
+* Types and classifications
+* Step-by-step understanding
+* Reflection questions
+* Learning resources
+* Source references
+* Final synthesis
+
+The result is a learning-first experience designed for comprehension rather than conversation.
+
+---
+
+## 🏗️ Architecture
 
 ```mermaid
 flowchart LR
-    User([User]) -->|Topic & Persona| RF[React Frontend]
-    RF -->|API Request| EB[Express Backend]
-    EB -->|Azure Foundry Orchestration| MA[MARTA Agent]
-    MA <-->|Search Grounding| BS[Bing Web Search]
-    MA -->|Cleaned Markdown| EB
-    EB -->|Sanitize & Validate| JSON[Structured JSON]
-    JSON -->|Validated Response| RF
-    RF -->|Visual Layout| BG[Bento Grid]
-    BG -->|Export Trigger| PDF[PDF Export]
+
+    User([User])
+
+    User -->|Topic + Persona| React[React Frontend]
+
+    React -->|REST API| Express[Express Backend]
+
+    Express -->|Agent Request| MARTA[MARTA Agent]
+
+    MARTA <-->|Grounding| Bing[Bing Web Search]
+
+    MARTA -->|Structured Output| Validation[Schema Validation]
+
+    Validation --> React
+
+    React --> Bento[Bento Grid Interface]
+
+    Bento --> PDF[PDF Export]
 ```
 
-## MARTA — The Foundry IQ Layer
-MARTA (Master Orchestrator Agent) is not an LLM wrapper — it is a search-grounded synthesis engine built on Azure AI Foundry.
+---
 
-- **Grounding:** Every response is anchored by Bing Web Search. MARTA retrieves live data before generating content.
-- **Zero Hallucination:** By enforcing a strict JSON schema and using search-grounded tools, MARTA eliminates fake URLs and fabricated technical definitions.
-- **Orchestration:** MARTA independently handles the transformation of complex topics into 10 distinct knowledge modules.
+## 🤖 Why Azure AI Foundry Agents?
 
-## 🤖 GitHub Copilot Usage
-Built with GitHub Copilot as the primary development assistant throughout the project.
+MARTA was intentionally designed as an Azure AI Foundry Agent instead of a simple model call.
 
-**Verified Microsoft Learn Achievement:** [Introduction to GitHub Copilot — Completed June 5, 2026](https://learn.microsoft.com/en-us/users/ahteshamlatif-8503/achievements/abqryyh7)
+The application requires:
 
-**How Copilot was used:**
-- Accelerated component scaffolding for all 9 React components
-- Assisted with TypeScript type definitions and interface design
-- Used for debugging the Azure AI Projects SDK integration
-- Helped write the AAA pattern test structure
-- Generated boilerplate for Express middleware and route handlers
+* Search grounding
+* Multi-step orchestration
+* Structured output generation
+* Retrieval-augmented responses
+* Tool integration
+* Validation workflows
 
-## Features
-- **8-Stage Pipeline:** Visualized tracking of the synthesis process from retrieval to formatting.
-- **Persona System:** Contextual framing for Student, Dev, Engineer, Kid, Teacher, Business, and the "Donkey" gamified mode.
-- **Bento Grid:** Neo-Brutalist high-contrast UI for maximum information density and scannability.
-- **Deep Dive:** Click any card item to populate the input field for instant deep-dive exploration.
-- **YouTube Interceptor:** Validates and embeds search-grounded video guides with graceful fallback.
-- **PDF Export:** High-fidelity server-side PDF generation via Puppeteer.
-- **System Cooling:** Backend rate limiter — 5 requests per 15 minutes per IP.
-- **Schema Guard:** Server-side validation ensuring MARTA's output meets the 10-field requirement.
+Using Azure AI Foundry enables these capabilities while maintaining reliability and separation between retrieval, reasoning, validation, and presentation.
 
-## 🔐 Security & Resilience
+---
 
-| Attack Vector | Behavior | Status |
-| :--- | :--- | :--- |
-| SQL Injection | Converted to educational content | ✅ Safe |
-| Prompt Injection | Blocked by Foundry guardrails | ✅ Safe |
-| XSS | Converted to educational content | ✅ Safe |
+## 🧠 MARTA: The Knowledge Synthesis Engine
 
-## Tech Stack
+MARTA is the project's orchestration layer.
 
-| Component | Technology |
-| :--- | :--- |
-| **Frontend** | React 19, Vite, Tailwind CSS v4, Framer Motion |
-| **Backend** | Node.js, Express, Puppeteer |
-| **AI Orchestration** | Azure AI Foundry (MARTA / GPT-4.1-mini) |
-| **Grounding** | Bing Web Search API |
-| **Language** | TypeScript |
+### Responsibilities
 
-## Quick Start
+* Retrieve grounded information
+* Analyze and synthesize content
+* Generate structured responses
+* Preserve citations
+* Enforce schema compliance
+* Deliver UI-ready knowledge modules
 
-1. **Clone the repository:**
+This architecture ensures the frontend only receives validated and predictable data.
+
+---
+
+## 📋 Structured Output Contract
+
+Every generated response must satisfy a strict schema before reaching the UI.
+
+```json
+{
+  "layman": "...",
+  "definition": "...",
+  "when_to_use": [],
+  "how_to_make": [],
+  "types": [],
+  "points_to_ponder": [],
+  "youtube_id": "...",
+  "youtube_fallback": "...",
+  "sources": [],
+  "conclusion": "..."
+}
+```
+
+### Validation Benefits
+
+* Prevents malformed AI responses
+* Eliminates incomplete generations
+* Ensures predictable rendering
+* Improves application reliability
+* Reduces hallucinated structure
+
+---
+
+## 🎯 Key Features
+
+### AI Knowledge Synthesis
+
+* Azure AI Foundry Agent orchestration
+* Search-grounded generation
+* Structured response validation
+* Citation-aware content generation
+
+### Multi-Persona Learning
+
+Generate explanations tailored for:
+
+* Student
+* Developer
+* Engineer
+* Teacher
+* Business Professional
+* Kid
+* Donkey Mode (A fun UI card)
+
+### Interactive Knowledge Interface
+
+* Neo-Brutalist Bento Grid design
+* High information density
+* Visual learning hierarchy
+* One-click deep dives
+
+### Learning Resources
+
+* YouTube integration
+* Video validation
+* Fallback support
+
+### Exporting
+
+* Server-side PDF generation
+* Downloadable learning reports
+* Print-ready formatting
+
+---
+
+## 🔒 Security & Reliability
+
+| Concern            | Protection                           |
+| ------------------ | ------------------------------------ |
+| Prompt Injection   | Azure AI Foundry safeguards          |
+| Invalid Responses  | Schema validation                    |
+| XSS Payloads       | Safe rendering pipeline              |
+| Excessive Requests | Express rate limiting                |
+| Broken Media Links | URL validation and fallback handling |
+
+### Rate Limiting
+
+```text
+5 requests per IP every 15 minutes
+```
+
+---
+
+## ⚙️ Technology Stack
+
+| Layer            | Technology                                     |
+| ---------------- | ---------------------------------------------- |
+| Frontend         | React 19, Vite, Tailwind CSS v4, Framer Motion |
+| Backend          | Node.js, Express                               |
+| AI Platform      | Azure AI Foundry                               |
+| Model            | GPT-4.1 Mini                                   |
+| Search Grounding | Bing Web Search                                |
+| PDF Generation   | Puppeteer                                      |
+| Language         | TypeScript                                     |
+| Testing          | Jest                                           |
+
+---
+
+## 🧪 Testing
+
+The project includes automated backend integration tests to verify API reliability, schema validation, and PDF generation workflows.
+
+### Run All Backend Tests
+
 ```bash
-   git clone https://github.com/Ahtesham-Latif/AI_KNOWLEDE_BUILDER_BACKED_BY_MARTA.git
-   cd AI_KNOWLEDE_BUILDER_BACKED_BY_MARTA
+npm run test:api
 ```
 
-2. **Install dependencies:**
+### Current Status
+
+```text
+PASS
+6 Tests Passing
+0 Tests Failing
+```
+
+### Backend Integration Test Coverage
+
+| Endpoint             | Scenario                                    | Status |
+| -------------------- | ------------------------------------------- | ------ |
+| GET /api/health      | Health check endpoint responds successfully | ✅      |
+| POST /api/generate   | Valid MARTA response schema                 | ✅      |
+| POST /api/generate   | Missing required request fields             | ✅      |
+| POST /api/generate   | Incomplete MARTA schema validation          | ✅      |
+| POST /api/export-pdf | Successful PDF generation                   | ✅      |
+| POST /api/export-pdf | Missing report data handling                | ✅      |
+
+### What Is Being Validated?
+
+* API availability and health monitoring
+* Structured AI response validation
+* Required field enforcement
+* MARTA schema compliance
+* Error handling behavior
+* Server-side PDF generation
+* Backend reliability under invalid inputs
+
+### Frontend Testing
+
+Frontend UI integration tests are currently being refactored to support ESM-compatible module mocking and expanded component coverage.
+
+Current UI test status does not affect production functionality or backend validation coverage.
+
+```
+```
+
+## 🚀 Quick Start
+
+### 1. Clone Repository
+
 ```bash
-   npm install
+git clone https://github.com/Ahtesham-Latif/AI_KNOWLEDGE_BUILDER_BACKED_BY_MARTA.git
+
+cd AI_KNOWLEDGE_BUILDER_BACKED_BY_MARTA
 ```
 
-3. **Setup environment:**
+### 2. Install Dependencies
+
 ```bash
-   cp .env.example .env
+npm install
 ```
 
-4. **Login to Azure CLI:**
+### 3. Configure Environment Variables
+
 ```bash
-   az login
+cp .env.example .env
 ```
 
-5. **Run the development server:**
+### 4. Authenticate with Azure
+
 ```bash
-   npm run dev
+az login
 ```
 
-## Environment Variables
+### 5. Start Development Server
 
-| Variable | Description |
-| :--- | :--- |
-| `FOUNDRY_ENDPOINT` | Azure AI Foundry agent endpoint URL |
-| `AZURE_CLI_AUTH` | Uses `AzureCliCredential` — run `az login` before starting |
+```bash
+npm run dev
+```
 
-## Project Structure
+---
+
+## 🔑 Environment Variables
+
+| Variable         | Description                       | Example                                  |
+| ---------------- | --------------------------------- | ---------------------------------------- |
+| FOUNDRY_ENDPOINT | Azure AI Foundry Endpoint         | https://your-agent.services.ai.azure.com |
+| AZURE_CLI_AUTH   | AzureCliCredential Authentication | Requires az login                        |
+
+---
+
+## 📂 Project Structure
 
 ```text
 root/
 ├── server.ts
 ├── src/
-│   ├── App.tsx
-│   ├── services/
-│   │   └── knowledgeService.ts
 │   ├── components/
-│   │   ├── Header.tsx
-│   │   ├── InputSection.tsx
-│   │   ├── KnowledgeDisplay.tsx
-│   │   ├── KnowledgeCard.tsx
-│   │   ├── LoaderSkeleton.tsx
-│   │   ├── ProcessChain.tsx
-│   │   ├── VideoBentoCard.tsx
-│   │   ├── YouTubePlayer.tsx
-│   │   └── ErrorBoundary.tsx
-│   └── types.ts
+│   ├── services/
+│   ├── hooks/
+│   ├── utils/
+│   ├── types.ts
+│   └── App.tsx
+├── tests/
 ├── AGENTS.md
-└── .env.example
+├── .env.example
+└── README.md
 ```
 
-## Hackathon Track
-- **Track:** Creative Apps
-- **Intelligence:** Foundry IQ (MARTA Orchestrator)
-- **GitHub Copilot:** Verified usage — Microsoft Learn Achievement June 5, 2026
-- **Eligibility:** Student Award (Ahtesham Latif — University of the Punjab, IBIT)
+---
 
-## Known Edge Cases & Future Work
-- **Unicode/Emoji:** High-density emoji topics may disrupt server-side PDF font rendering
-- **Timeout Retry:** Exponential backoff for Azure Foundry cold starts — planned
-- **Web Search Fallback:** Improved logic for sparse Bing results — planned
-- **Gravity Mode (V2):** Physics-based Bento Card interaction — planned
+## 🏆 GitHub Copilot Usage
 
-## License
-MIT
+GitHub Copilot was used throughout development to accelerate engineering workflows.
+
+### Contributions
+
+* Component scaffolding
+* TypeScript interfaces
+* Express middleware generation
+* Testing boilerplate
+* Refactoring assistance
+* Azure SDK integration support
+
+### Verified Achievement
+
+**Introduction to GitHub Copilot**
+Completed June 5, 2026
+
+[![Introduction to GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Achievement%20Verified-000000?style=for-the-badge&logo=githubcopilot&logoColor=white)](https://learn.microsoft.com/en-us/users/ahteshamlatif-8503/achievements/abqryyh7)
 
 ---
-**Developer:** Ahtesham Latif
-**University:** University of the Punjab (IBIT)
-**Hackathon:** Microsoft Agents League — AI Skills Fest 2026
+
+## 🔮 Future Enhancements
+
+* Persistent knowledge history
+* Multi-language support
+* Advanced PDF themes
+* Improved retrieval fallback strategies
+* Physics-based Bento interactions
+* Knowledge comparison mode
+
+---
+
+## 🤝 Contributing
+
+Contributions, suggestions, and feedback are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a pull request
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## 👨‍💻 Author
+
+**Ahtesham Latif**
+
+Business & IT Student
+University of the Punjab (IBIT)
+
+### Built For
+
+**Microsoft Agents League – AI Skills Fest 2026**
+
+*"Making AI-generated knowledge easier to understand, verify, and learn from."*

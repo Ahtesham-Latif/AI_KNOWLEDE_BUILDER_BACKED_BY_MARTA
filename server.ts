@@ -15,12 +15,11 @@ import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const currentFilePath = fileURLToPath(import.meta.url);
+const currentDirPath = path.dirname(currentFilePath);
 
-async function startServer() {
+export async function createServer() {
   const app = express();
-  const PORT = 3000;
 
   // Trust proxy to ensure accurate client IP detection for rate limiting
   app.set('trust proxy', 1);
@@ -459,7 +458,7 @@ async function startServer() {
   });
 
   // Vite middleware setup
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
@@ -472,10 +471,15 @@ async function startServer() {
       res.sendFile(path.join(distPath, "index.html"));
     });
   }
-
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://0.0.0.0:${PORT}`);
-  });
+  
+  return app;
 }
 
-startServer();
+if (process.env.NODE_ENV !== "test") {
+  createServer().then(app => {
+    const PORT = 3000;
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://0.0.0.0:${PORT}`);
+    });
+  });
+}
