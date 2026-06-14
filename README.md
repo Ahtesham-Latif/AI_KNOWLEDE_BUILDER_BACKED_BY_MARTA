@@ -103,6 +103,8 @@ Using Azure AI Foundry enables these capabilities while maintaining reliability 
 ## 🧠 MARTA: The Knowledge Synthesis Engine
 
 MARTA is the project's orchestration layer.
+### Meet MARTA
+![MARTA Agent Interface](./Pictures/Marta-Interface.png)
 
 ### Responsibilities
 
@@ -419,6 +421,8 @@ Different AI models were used strategically based on their strengths:
 | Hackathon compliance review | Gemini |
 | MARTA system prompt engineering | Claude + Gemini |
 | Engineering and Architect Advices | K (Azure Foundry Agent)
+### Meet Non-Chalant K 🥴
+![K Agent Interface](./Pictures/K-Interface.png)
 
 This multi-model approach mirrors real-world AI-assisted development — using the right tool for the right task rather than defaulting to a single model for everything.
 
