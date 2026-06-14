@@ -188,7 +188,14 @@ export async function createServer() {
 
       const page = await browser.newPage();
 
-      await page.setViewport({ width: 1200, height: 900, deviceScaleFactor: 1 });
+      await page.setViewport({
+        width: 1200,
+        height: 900,
+        deviceScaleFactor: 1,
+        isMobile: false,
+        hasTouch: false,
+        isLandscape: true
+      });
 
       const htmlContent = `
         <!DOCTYPE html>
@@ -423,10 +430,10 @@ export async function createServer() {
         width: '1200px',
         printBackground: true,
         margin: {
-          top: "20mm",
-          bottom: "20mm",
-          left: "15mm",
-          right: "15mm"
+          top: '20mm',
+          bottom: '20mm',
+          left: '15mm',
+          right: '15mm'
         }
       });
 

@@ -167,6 +167,32 @@ Generate explanations tailored for:
 * Kid
 * Donkey Mode (A fun UI card)
 
+## 🎭 Persona System in Action
+
+Same complex topic. Completely different knowledge artifact. MARTA adapts everything — depth, language, analogies, and technical detail — based on the target audience.
+
+**Topic:** Transformer Architecture: Multi-Head Self-Attention Mechanism
+
+### 👷 Engineer Mode
+- Layman uses architecture pattern analogies
+- Steps include actual matrix math: `softmax(QK^T / sqrt(d_k))V`
+- Types cover Masked, Cross-Attention, Sparse variants
+- Points to Ponder focus on computational complexity and regularization
+- Conclusion includes full formal formula: `MultiHead(Q,K,V) = Concat(head_1,...,head_h)W^O`
+
+### 🧒 Kid Mode  
+- Layman uses "magical talking book" and "special glasses" metaphors
+- Steps simplified to plain English — no matrix notation
+- Same formula in conclusion — accuracy preserved despite simplified language
+- Sources adapted to beginner-friendly resources
+
+### 📄 Exported PDFs
+Both personas export as pixel-perfect high-fidelity PDFs:
+- [Engineer Report](./Pictures/transformer_architecture__multi-head_self-attention_mechanism_full_report%20FOR%20Engineer.pdf)
+- [Kid Report](./Pictures/transformer_architecture__multi-head_self-attention_mechanism_full_report%20FOR%20KID.pdf)
+
+> MARTA doesn't just change the tone. She rewrites the entire knowledge architecture for the audience.
+
 ### Interactive Knowledge Interface
 
 * Neo-Brutalist Bento Grid design
@@ -186,6 +212,17 @@ Generate explanations tailored for:
 * Downloadable learning reports
 * Print-ready formatting
 
+### 📱 Cross-Device PDF Export
+
+High-fidelity PDF export works flawlessly across all devices and screen sizes.
+
+Puppeteer renders the PDF server-side at a fixed 1200px desktop viewport regardless of the requesting device — ensuring every export looks identical whether downloaded on mobile, tablet, or desktop.
+
+- Mobile download ✅
+- Tablet download ✅  
+- Desktop download ✅
+- Print-ready formatting ✅
+- Consistent Neo-Brutalist layout preserved across all exports ✅
 ---
 
 ## 🔒 Security & Reliability
@@ -319,15 +356,36 @@ npm run dev
 ```text
 root/
 ├── server.ts
+├── index.html
+├── vite.config.ts
+├── tsconfig.json
+├── jest.config.js
+├── jest.setup.ts
+├── ui.test.tsx
+├── metadata.json
 ├── src/
-│   ├── components/
-│   ├── services/
-│   ├── hooks/
-│   ├── utils/
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── index.css
 │   ├── types.ts
-│   └── App.tsx
+│   ├── components/
+│   │   ├── Header.tsx
+│   │   ├── InputSection.tsx
+│   │   ├── KnowledgeDisplay.tsx
+│   │   ├── KnowledgeCard.tsx
+│   │   ├── LoaderSkeleton.tsx
+│   │   ├── ProcessChain.tsx
+│   │   ├── YouTubePlayer.tsx
+│   │   └── ErrorBoundary.tsx
+│   ├── services/
+│   │   └── knowledgeService.ts
+│   └── lib/
 ├── tests/
-├── AGENTS.md
+│   └── api.test.ts
+├── Pictures/
+│   ├── Layout.png
+│   └── ahtesham_latif_full_report.pdf
+├── Agents.md
 ├── .env.example
 └── README.md
 ```
@@ -346,6 +404,32 @@ GitHub Copilot was used throughout development to accelerate engineering workflo
 * Testing boilerplate
 * Refactoring assistance
 * Azure SDK integration support
+
+### Multi-Model AI Development Approach
+
+Different AI models were used strategically based on their strengths:
+
+| Task | Model Used |
+| --- | --- |
+| Component scaffolding and Express middleware | GitHub Copilot |
+| Azure SDK integration debugging | GitHub Copilot |
+| Neo-Brutalist design patterns and UI architecture | Claude (Anthropic) |
+| Video edit planning and demo script | Gemini Omni |
+| Hackathon compliance review | Gemini |
+| MARTA system prompt engineering | Claude + Gemini |
+
+This multi-model approach mirrors real-world AI-assisted development — using the right tool for the right task rather than defaulting to a single model for everything.
+
+### AI-Assisted Development Examples
+
+**Prompt used for PDF viewport fix:**
+> "In server.ts, the PDF export via Puppeteer is rendering incorrectly on mobile devices. Add setViewport with width 1200, deviceScaleFactor 1, isMobile false before page.setContent(). Force desktop rendering regardless of device."
+
+**Prompt used for MARTA integration:**
+> "Replace the /api/generate route with a direct REST call to Azure Foundry Agent MARTA using AzureCliCredential. Read FOUNDRY_ENDPOINT from process.env. Parse the response output array finding type message, extract content text value, clean JSON markdown blocks, parse and return."
+
+**Prompt used for security hardening:**
+> "Add backend rate limiting to Express /api/generate using express-rate-limit. 5 requests per 15 minutes per IP. Return custom message: Too many requests. System cooling down."
 
 ### Verified Achievement
 
