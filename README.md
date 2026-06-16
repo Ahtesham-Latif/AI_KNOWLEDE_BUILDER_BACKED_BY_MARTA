@@ -61,24 +61,28 @@ The result is a learning-first experience designed for comprehension rather than
 
 ```mermaid
 flowchart LR
-
     User([User])
-
-    User -->|Topic + Persona| React[React Frontend]
-
-    React -->|REST API| Express[Express Backend]
-
-    Express -->|Agent Request| MARTA[MARTA Agent]
-
-    MARTA <-->|Grounding| Bing[Bing Web Search]
-
-    MARTA -->|Structured Output| Validation[Schema Validation]
-
-    Validation --> React
-
-    React --> Bento[Bento Grid Interface]
-
-    Bento --> PDF[PDF Export]
+    User -->|"Topic + Persona"| React["React Frontend"]
+    React -->|"60s Client Check"| FRL["Frontend Rate Limiter"]
+    FRL -->|"Blocked"| Modal["System Cooling Modal"]
+    FRL -->|"Passed"| Express["Express Backend"]
+    Express -->|"5 req/15min per IP"| BRL["Backend Rate Limiter"]
+    BRL -->|"Blocked"| E429["Too many requests. System cooling down."]
+    BRL -->|"Passed"| MARTA["MARTA Agent"]
+    MARTA <-->|"Bing Web Search"| Bing["Live Web Grounding"]
+    MARTA -->|"Safety Check"| Guard["Foundry Guardrails"]
+    Guard -->|"Blocked"| E400["Request blocked by safety guardrails."]
+    Guard -->|"Passed"| Validation["Schema Validation"]
+    Validation -->|"Validated JSON"| Bento["Bento Grid Interface"]
+    Bento -->|"YouTube URL"| YT["YouTube Interceptor"]
+    YT -->|"Available"| Embed["Embedded Player"]
+    YT -->|"Unavailable"| Fallback["YouTube Search Fallback"]
+    Bento -->|"Click Source Link"| Tab["Opens in New Tab"]
+    Bento -->|"Click Card Item"| Input["Inserts into Input Field"]
+    Input -->|"User hits Generate"| React
+    Bento -->|"Export Card"| PNG["PNG Download"]
+    Bento -->|"Export All"| Puppeteer["Server-side Puppeteer"]
+    Puppeteer --> PDF["High-Fidelity PDF"]
 ```
 
 ---
